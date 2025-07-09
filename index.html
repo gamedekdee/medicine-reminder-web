@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ระบบแจ้งเตือนกินยา</title>
+  <!-- OneSignal SDK -->
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+  <script>
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+      OneSignal.init({
+        appId: "YOUR_ONESIGNAL_APP_ID",     // <— แก้เป็น App ID ของคุณ
+        notifyButton: {
+          enable: true                     // ปุ่ม Allow/Block เล็ก ๆ มุมขวาล่าง
+        },
+      });
+    });
+  </script>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2rem; }
+    button { padding: .6rem 1.2rem; font-size: 1rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>ระบบแจ้งเตือนกินยา</h1>
+  <p>กดปุ่มด้านล่างเพื่อรับแจ้งเตือนเวลาต้องกินยา</p>
+  <button id="btn-subscribe">เปิดรับแจ้งเตือน</button>
+
+  <script>
+    const btn = document.getElementById('btn-subscribe');
+    btn.addEventListener('click', () => {
+      OneSignal.push(function() {
+        OneSignal.showNativePrompt();   // เรียกให้ Browser แสดง dialog ขออนุญาต
+      });
+    });
+  </script>
+</body>
+</html>
